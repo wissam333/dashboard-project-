@@ -40,7 +40,7 @@ export default {
     color: #fff;
     margin-left: 24rem;
     width: calc(100% - 24rem);
-    padding-right: 24px;
+    padding-right: 29px;
     margin-top: 17px;
     margin-bottom: 9px;
     font-size: 14px;

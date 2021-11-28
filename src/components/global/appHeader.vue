@@ -274,6 +274,9 @@ export default {
         transform: translateY(0);
     }
 }
+.row {
+    --bs-gutter-x: 0;
+}
 .overlay {
     position: fixed;
     top: 0;
@@ -301,7 +304,7 @@ export default {
         margin: 1rem 0rem 2rem 0rem;
         border-radius: 10px;
         position: fixed;
-        width: calc(100% - 3rem - 23rem);
+        width: calc(100% - 4rem - 22rem);
         z-index: 10;
         ul {
             display: inline;

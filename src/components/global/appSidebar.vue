@@ -13,7 +13,7 @@
                     </div>
                 </div>
 
-                <div class="brand-name">CUBE</div>
+                <div class="brand-name">THE CUBE</div>
             </a>
         </div>
         <div class="sidebar-buttons">

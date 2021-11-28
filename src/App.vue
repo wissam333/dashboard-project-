@@ -44,6 +44,8 @@ export default {
     position: relative;
     .row {
         margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 </style>

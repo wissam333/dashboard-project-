@@ -40,7 +40,11 @@
 
         <div class="select-bar">
             <label class="select cheack-box">
-                <input type="checkbox" />
+                <input
+                    type="checkbox"
+                    @click="selectAll"
+                    v-model="allSelected"
+                />
                 <span class="checkmark"></span>
             </label>
             <span>Select All</span>
@@ -63,14 +67,8 @@
                                 <label class="container cheack-box">
                                     <input
                                         type="checkbox"
-                                        @click="
-                                            email.selected = !email.selected
-                                        "
-                                        :class="
-                                            email.selected
-                                                ? ':checked ~ .checkmark:after'
-                                                : ''
-                                        "
+                                        v-model="emailIds"
+                                        :value="email.id"
                                     />
                                     <span class="checkmark"></span>
                                 </label>
@@ -125,6 +123,9 @@ export default {
     data: function () {
         return {
             emails: jsonEmails,
+            selected: [],
+            allSelected: false,
+            emailIds: [],
         };
     },
     filters: {
@@ -133,6 +134,17 @@ export default {
                 return e.substring(0, len) + "...";
             } else {
                 return e;
+            }
+        },
+    },
+    methods: {
+        selectAll: function () {
+            this.emailIds = [];
+
+            if (!this.allSelected) {
+                this.emails.forEach((email) => {
+                    this.emailIds.push(email.id);
+                });
             }
         },
     },
