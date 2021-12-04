@@ -144,7 +144,10 @@
         <div class="labels">
             <p>LABELS</p>
             <ul>
-                <li><span class="bullet"></span> Personal</li>
+                <li @click="category = 'Personal'">
+                    <span class="bullet"></span>
+                    Personal
+                </li>
                 <li><span class="bullet"></span> Company</li>
                 <li><span class="bullet"></span> Important</li>
                 <li><span class="bullet"></span> Private</li>
@@ -164,10 +167,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/* -----
-SVG Icons
------ */
-
 svg {
     margin-right: 0.7rem;
     color: #b4b7bd;
@@ -235,12 +234,12 @@ ul {
             li {
                 padding: 10px 15px 10px 21px;
                 font-size: 15px;
+                cursor: pointer;
                 .bullet {
                     display: inline-block;
                     width: 10px;
                     height: 10px;
                     border-radius: 50%;
-                    background-color: red;
                     margin-right: 10px;
                 }
                 &:nth-of-type(1) {
