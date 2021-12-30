@@ -349,13 +349,12 @@ ul {
         }
         /* Scrollbar Styling */
         &:hover {
-            overflow-y: scroll;
-            &::-webkit-scrollbar {
-                width: 10px;
-                opacity: 0.9;
-            }
+            overflow-y: overlay;
         }
-
+        &::-webkit-scrollbar {
+            width: 10px;
+            opacity: 0.9;
+        }
         &::-webkit-scrollbar-track {
             background-color: #3b4253;
             -webkit-border-radius: 10px;

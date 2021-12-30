@@ -12,4 +12,9 @@ new Vue({
     router,
     store,
     render: (h) => h(App),
+    data: function () {
+        return {
+            category: "all",
+        };
+    },
 }).$mount("#app");

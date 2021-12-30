@@ -56,10 +56,11 @@
                     <li
                         v-for="email in emails"
                         :key="email.id"
-                        :name="email.name"
-                        :title="email.title"
-                        :body="email.body"
-                        :cat="email.cat"
+                        v-show="
+                            email.cat == $root.category ||
+                            $root.category == 'all' ||
+                            email.status == $root.category
+                        "
                     >
                         <div class="media">
                             <div class="media-aside">
@@ -78,7 +79,8 @@
                                     <div class="star">
                                         <svg
                                             @click="
-                                                email.starred = !email.starred
+                                                email.starred = !email.starred;
+                                                email.status = 'starred';
                                             "
                                             :class="
                                                 email.starred ? 'fill-star' : ''
@@ -188,9 +190,24 @@ export default {
             }
         },
     },
+    created: function () {},
 };
 </script>
 <style lang="scss" scoped>
+@keyframes fade {
+    0% {
+        opacity: 0;
+        top: 100px;
+    }
+    75% {
+        opacity: 0.5;
+        top: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 ul {
     list-style: none;
 }
@@ -296,7 +313,6 @@ ul {
     }
     .emails-blocks {
         height: calc(100% - 50px - 50px);
-        overflow: hidden;
         /* Scrollbar Styling */
         &::-webkit-scrollbar {
             width: 8px;
@@ -311,125 +327,166 @@ ul {
             background: #b4b7bd;
         }
         &:hover {
-            overflow-y: scroll;
+            overflow-y: overlay;
         }
 
         //media
         ul {
             padding: 0;
             margin: 0;
-            .media {
-                background-color: #242b3d;
-                border-bottom: 1px solid #3b4253;
-                display: flex;
-                padding: 1rem;
-                line-height: 27px;
-                transition: all ease 0.2s;
-                cursor: pointer;
-                &:hover {
-                    box-shadow: 0 3px 10px 0 #283046;
-                    transform: translateY(-2px);
-                }
-                .media-aside {
-                    display: inline-flex;
-                    flex-wrap: wrap;
-                    width: 50px;
-                    img {
-                        width: 45px;
-                        margin-bottom: 8px;
+            li:nth-of-type(1) {
+                animation-delay: 0.1s;
+            }
+            li:nth-of-type(2) {
+                animation-delay: 0.2s;
+            }
+            li:nth-of-type(3) {
+                animation-delay: 0.3s;
+            }
+            li:nth-of-type(4) {
+                animation-delay: 0.4s;
+            }
+            li:nth-of-type(5) {
+                animation-delay: 0.5s;
+            }
+            li:nth-of-type(6) {
+                animation-delay: 0.6s;
+            }
+            li:nth-of-type(7) {
+                animation-delay: 0.7s;
+            }
+            li:nth-of-type(8) {
+                animation-delay: 0.75s;
+            }
+            li:nth-of-type(9) {
+                animation-delay: 0.8s;
+            }
+            li:nth-of-type(10) {
+                animation-delay: 0.85s;
+            }
+            li:nth-of-type(11) {
+                animation-delay: 0.9s;
+            }
+            li:nth-of-type(12) {
+                animation-delay: 0.95s;
+            }
+            li {
+                position: relative;
+                animation: fade 0.5s linear;
+                animation-fill-mode: both;
+                .media {
+                    background-color: #242b3d;
+                    border-bottom: 1px solid #3b4253;
+                    display: flex;
+                    padding: 1rem;
+                    line-height: 27px;
+                    transition: all ease 0.2s;
+                    cursor: pointer;
+                    &:hover {
+                        box-shadow: 0 3px 10px 0 #283046;
+                        transform: translateY(-2px);
                     }
-                    .select-star {
-                        display: inline;
-                        .container {
-                            display: inline-flex;
-                            width: 22.5px;
-                            height: 22.5px;
-                            padding: 0;
-                            input {
-                                width: 18px;
-                                height: 18px;
+                    .media-aside {
+                        display: inline-flex;
+                        flex-wrap: wrap;
+                        width: 50px;
+                        img {
+                            width: 45px;
+                            margin-bottom: 8px;
+                        }
+                        .select-star {
+                            display: inline;
+                            .container {
+                                display: inline-flex;
+                                width: 22.5px;
+                                height: 22.5px;
+                                padding: 0;
+                                input {
+                                    width: 18px;
+                                    height: 18px;
+                                }
+                                .checkmark {
+                                    position: initial;
+                                    &::after {
+                                        left: 5px;
+                                        top: 2px;
+                                    }
+                                }
                             }
-                            .checkmark {
-                                position: initial;
-                                &::after {
-                                    left: 5px;
-                                    top: 2px;
+                            .star {
+                                display: inline-flex;
+                                justify-content: flex-end;
+                                width: 22.5px;
+                                height: 22.5px;
+                                svg {
+                                    width: 18px;
+                                    height: 18px;
+                                    color: #b9b9c3;
+                                    &.fill-star {
+                                        color: #ff9f43 !important;
+                                        fill: #ff9f43;
+                                    }
                                 }
                             }
                         }
-                        .star {
-                            display: inline-flex;
-                            justify-content: flex-end;
-                            width: 22.5px;
-                            height: 22.5px;
-                            svg {
-                                width: 18px;
-                                height: 18px;
-                                color: #b9b9c3;
-                                &.fill-star {
-                                    color: #ff9f43 !important;
-                                    fill: #ff9f43;
-                                }
+                    }
+                    .media-body {
+                        width: calc(100% - 50px);
+                        text-align: left;
+                        position: relative;
+                        .main-info {
+                            width: 100%;
+                            color: #b4b7bd;
+                            h5 {
+                                font-size: 19px;
+                                font-weight: 600;
+                                color: #d0d2d6;
+                                margin: 0;
                             }
                         }
-                    }
-                }
-                .media-body {
-                    width: calc(100% - 50px);
-                    text-align: left;
-                    position: relative;
-                    .main-info {
-                        width: 100%;
-                        color: #b4b7bd;
-                        h5 {
-                            font-size: 19px;
-                            font-weight: 600;
-                            color: #d0d2d6;
+                        p {
                             margin: 0;
+                            color: #b4b7bd;
                         }
-                    }
-                    p {
-                        margin: 0;
-                        color: #b4b7bd;
-                    }
-                    .object {
-                        width: 100%;
-                        color: #676d7d;
-                        font-size: 14px;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                    }
-                    .email-items {
-                        color: #b9b9c3;
-                        font-size: 12px;
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        svg {
-                            display: none;
-                            &.attach {
-                                display: inline;
-                            }
+                        .object {
+                            width: 100%;
+                            color: #676d7d;
+                            font-size: 14px;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
                         }
-                        .category {
-                            display: inline-block;
-                            width: 10px;
-                            height: 10px;
-                            border-radius: 50%;
-                            margin: 0 5px;
-                            &.Personal {
-                                background-color: #28c76f;
+                        .email-items {
+                            color: #b9b9c3;
+                            font-size: 12px;
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            svg {
+                                display: none;
+                                &.attach {
+                                    display: inline;
+                                }
                             }
-                            &.Company {
-                                background-color: #7367f0;
-                            }
-                            &.Important {
-                                background-color: #ff9f43;
-                            }
-                            &.Private {
-                                background-color: #ea5455;
+                            .category {
+                                display: inline-block;
+                                width: 10px;
+                                height: 10px;
+                                border-radius: 50%;
+                                margin: 0 5px;
+                                &.Personal {
+                                    background-color: #28c76f;
+                                }
+                                &.Company {
+                                    background-color: #7367f0;
+                                }
+                                &.Important {
+                                    background-color: #ff9f43;
+                                }
+                                &.Private {
+                                    background-color: #ea5455;
+                                }
                             }
                         }
                     }

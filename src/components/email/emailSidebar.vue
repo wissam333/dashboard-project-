@@ -6,7 +6,10 @@
         <div class="groups">
             <ul>
                 <li
-                    @click="active = 'inbox'"
+                    @click="
+                        active = 'inbox';
+                        $root.category = 'all';
+                    "
                     :class="active == 'inbox' ? 'active' : ''"
                 >
                     <svg
@@ -30,7 +33,10 @@
                 <span class="notifiction"></span>
 
                 <li
-                    @click="active = 'sent'"
+                    @click="
+                        active = 'sent';
+                        $root.category = 'sent';
+                    "
                     :class="active == 'sent' ? 'active' : ''"
                 >
                     <svg
@@ -53,7 +59,10 @@
                 </li>
 
                 <li
-                    @click="active = 'draft'"
+                    @click="
+                        active = 'draft';
+                        $root.category = 'draft';
+                    "
                     :class="active == 'draft' ? 'active' : ''"
                 >
                     <svg
@@ -75,7 +84,10 @@
                 </li>
                 <span class="notifiction"></span>
                 <li
-                    @click="active = 'starred'"
+                    @click="
+                        active = 'starred';
+                        $root.category = 'starred';
+                    "
                     :class="active == 'starred' ? 'active' : ''"
                 >
                     <svg
@@ -96,7 +108,10 @@
                     >Starred
                 </li>
                 <li
-                    @click="active = 'spam'"
+                    @click="
+                        active = 'spam';
+                        $root.category = 'spam';
+                    "
                     :class="active == 'spam' ? 'active' : ''"
                 >
                     <svg
@@ -118,7 +133,10 @@
                 </li>
                 <span class="notifiction"></span>
                 <li
-                    @click="active = 'trash'"
+                    @click="
+                        active = 'trash';
+                        $root.category = 'trash';
+                    "
                     :class="active == 'trash' ? 'active' : ''"
                 >
                     <svg
@@ -144,13 +162,43 @@
         <div class="labels">
             <p>LABELS</p>
             <ul>
-                <li @click="category = 'Personal'">
+                <li
+                    @click="
+                        $root.category = 'Personal';
+                        active = 'Personal';
+                    "
+                    :class="active == 'Personal' ? 'active' : ''"
+                >
                     <span class="bullet"></span>
                     Personal
                 </li>
-                <li><span class="bullet"></span> Company</li>
-                <li><span class="bullet"></span> Important</li>
-                <li><span class="bullet"></span> Private</li>
+                <li
+                    @click="
+                        $root.category = 'Company';
+                        active = 'Company';
+                    "
+                    :class="active == 'Company' ? 'active' : ''"
+                >
+                    <span class="bullet"></span> Company
+                </li>
+                <li
+                    @click="
+                        $root.category = 'Important';
+                        active = 'Important';
+                    "
+                    :class="active == 'Important' ? 'active' : ''"
+                >
+                    <span class="bullet"></span> Important
+                </li>
+                <li
+                    @click="
+                        $root.category = 'Private';
+                        active = 'Private';
+                    "
+                    :class="active == 'Private' ? 'active' : ''"
+                >
+                    <span class="bullet"></span> Private
+                </li>
             </ul>
         </div>
     </div>
@@ -235,6 +283,14 @@ ul {
                 padding: 10px 15px 10px 21px;
                 font-size: 15px;
                 cursor: pointer;
+                border-left: 2px solid transparent;
+                &:hover {
+                    color: #7367f0;
+                }
+                &.active {
+                    border-left: 2px solid #7367f0;
+                    color: #7367f0;
+                }
                 .bullet {
                     display: inline-block;
                     width: 10px;
